@@ -31,7 +31,7 @@ class EPN(nn.Module):
             nn.ReLU(),
         )
 
-        self.in_channels = 6
+        self.in_channels = 3
         kernels = (3, 3, 3)
         stride = 1
         d = 4
