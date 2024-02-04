@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH -J 4_5
+#SBATCH -J maze
 #SBATCH -N 1
 #SBATCH -n 1
 #sbatch --gpus=2
 #SBATCH -p jepyc
 #SBATCH -o %x.out
 #SBATCH -e %x.err
-#SBATCH -D /mnt/lustre/ibs/dscig/kdkyum/workdir/cart-pole-test
+#SBATCH -D /mnt/lustre/ibs/dscig/kdkyum/workdir/maze
 
 __conda_setup="$('/opt/olaf/anaconda3/2020.11/GNU/4.8/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 eval "$__conda_setup"
