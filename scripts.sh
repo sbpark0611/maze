@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J maze
+#SBATCH -J 2
 #SBATCH -N 1
 #SBATCH -n 1
 #sbatch --gpus=2
