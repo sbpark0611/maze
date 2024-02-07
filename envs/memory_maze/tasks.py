@@ -141,10 +141,10 @@ def _memory_maze(
 
     if discrete_actions:
         env = DiscreteActionSetWrapper(env, [
-            np.array([0.0, 0.0]),  # noop
+            #np.array([0.0, 0.0]),  # noop
             np.array([-1.0, 0.0]),  # forward
-            np.array([0.0, -1.0]),  # left
-            np.array([0.0, +1.0]),  # right
+            #np.array([0.0, -1.0]),  # left
+            #np.array([0.0, +1.0]),  # right
             np.array([-1.0, -1.0]),  # forward + left
             np.array([-1.0, +1.0]),  # forward + right
         ])
