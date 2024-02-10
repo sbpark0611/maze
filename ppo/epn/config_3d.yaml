@@ -27,14 +27,14 @@ ppo:
 
 epn:
   embedding_size: 32
-  num_heads: 3
+  num_heads: 4
   hidden_size: 256
   num_iterations: 2
 
 optim:
   total_timesteps: 500_000_000
   linear_schedule: False
-  learning_rate: 0.0003
+  learning_rate: 0.0002
   clip_range: 0.2
 
 logger:
