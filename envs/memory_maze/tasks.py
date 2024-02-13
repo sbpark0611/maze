@@ -151,6 +151,6 @@ def _memory_maze(
 
     env = GymWrapper(env)
     env = ObsWrapper(env)
-    env = ReverseModeWrapper(env, task)
+    # env = ReverseModeWrapper(env, task)
 
     return env

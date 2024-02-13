@@ -38,6 +38,7 @@ def main(cfg: DictConfig) -> None:
     
     callback_list = [EvalCallback(eval_env, prefix="eval/novel")]
 
+    '''
     r_envs = {}
     for i in [1,3]:
         r_envs[i] = VecNormalize(
@@ -46,8 +47,10 @@ def main(cfg: DictConfig) -> None:
             ), norm_obs=cfg.env.norm_obs, norm_obs_keys=["image", "prev_image"], norm_reward=cfg.env.norm_reward
         )
         callback_list.append(EvalCallback(r_envs[i], prefix="eval/reverse%d" %(i+1)))
+    '''
+
     callback = CallbackList(callback_list)
-    
+
     run = wandb.init(
         dir=cfg.logger.run_dir,
         config=OmegaConf.to_container(cfg, resolve=True, throw_on_missing=True),
