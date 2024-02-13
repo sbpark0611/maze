@@ -22,7 +22,7 @@ def memory_maze_9x9(**kwargs):
         roomMinSize = 3,
     }
     """
-    return _memory_maze(9, 3, 250, **kwargs)
+    return _memory_maze(9, 2, 2000, **kwargs) # Sangbin changed it to 1000 from 250
 
 
 def memory_maze_11x11(**kwargs):
@@ -51,7 +51,7 @@ def _memory_maze(
     maze_size,  # measured without exterior walls
     n_targets,
     time_limit,
-    max_rooms=6,
+    max_rooms=2, # Sangbin changed it to 3 from 6
     room_min_size=3,
     room_max_size=5,
     control_freq=DEFAULT_CONTROL_FREQ,
@@ -60,7 +60,7 @@ def _memory_maze(
     target_color_in_image=False,
     global_observables=True,
     top_camera=False,
-    good_visibility=False,
+    good_visibility=True, # Sangbin changed it to True
     show_path=True,
     camera_resolution=64,
     seed=None,

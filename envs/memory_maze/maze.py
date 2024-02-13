@@ -137,8 +137,8 @@ class MemoryMazeTask(random_goal_maze.NullGoalMaze):
             if not ok:
                 # Could not place targets - regenerate the maze
                 self._maze_arena.regenerate(rng)
-                continue
-            break
+            else:
+                break
         self._pick_new_target(rng)
 
     def initialize_episode(self, physics, rng: RandomState):
