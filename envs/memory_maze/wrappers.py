@@ -279,6 +279,7 @@ class ObsWrapper(gym.Wrapper):
 
         return new_obs, reward, done, truncate, info
 
+'''
 class ReverseModeWrapper(gym.Wrapper):
     def __init__(self, env, task):
         super().__init__(env)
@@ -291,7 +292,7 @@ class ReverseModeWrapper(gym.Wrapper):
         return obs, info
 
     def step(self, action):
-        obs, reward, done, truncate, info = self.env.step(1)
+        obs, reward, done, truncate, info = self.env.step(action)
         if self.task.is_color_swapped:
             self.task.target_color_before_swap
             obs['goal'] = self.task.target_color_before_swap
@@ -315,3 +316,5 @@ def SaveImage(x, i):
 
     img = Image.fromarray(x) # NumPy array to PIL image
     img.save(str(i)+'.jpg','JPEG') # save PIL image
+
+'''

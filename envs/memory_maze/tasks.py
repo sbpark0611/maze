@@ -22,7 +22,7 @@ def memory_maze_9x9(**kwargs):
         roomMinSize = 3,
     }
     """
-    return _memory_maze(9, 2, 2000, **kwargs) # Sangbin changed it to 1000 from 250
+    return _memory_maze(5, 1, 500, **kwargs) # Sangbin changed it to 1000 from 250
 
 
 def memory_maze_11x11(**kwargs):
