@@ -259,7 +259,7 @@ class ObsWrapper(gym.Wrapper):
 
     def reset(self, seed = 0):
         #print("start")
-        self.s = 0
+        #self.s = 0
         obs, info = self.env.reset(seed)
         self.prev_image = obs["image"]
         new_obs = {"image": obs["image"], "prev_action": 0, "prev_image": self.prev_image, "goal": obs["target_color"]}
@@ -270,8 +270,8 @@ class ObsWrapper(gym.Wrapper):
         return new_obs, info
 
     def step(self, action):
-        self.s += 1
-        print("step",self.s)
+        #self.s += 1
+        #print("step",self.s)
         obs, reward, done, truncate, info = self.env.step(action)
 
         # add num of actions to get a target
