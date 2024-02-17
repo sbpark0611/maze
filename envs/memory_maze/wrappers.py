@@ -10,7 +10,6 @@ sys.modules["gym"] = gym
 from math import inf
 import copy
 import cv2
-import time
 
 
 class Wrapper(dm_env.Environment):
