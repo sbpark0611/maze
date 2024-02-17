@@ -1,0 +1,214 @@
+2024-02-17 14:28:04,450 INFO    StreamThr :38195 [internal.py:wandb_internal():86] W&B internal server running at pid: 38195, started at: 2024-02-17 14:28:04.449609
+2024-02-17 14:28:04,452 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: status
+2024-02-17 14:28:04,455 INFO    WriterThread:38195 [datastore.py:open_for_write():85] open: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/run-l6fu7xnz.wandb
+2024-02-17 14:28:04,458 DEBUG   SenderThread:38195 [sender.py:send():379] send: header
+2024-02-17 14:28:04,496 DEBUG   SenderThread:38195 [sender.py:send():379] send: run
+2024-02-17 14:28:05,097 INFO    SenderThread:38195 [dir_watcher.py:__init__():211] watching files in: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files
+2024-02-17 14:28:05,097 INFO    SenderThread:38195 [sender.py:_start_run_threads():1121] run started: l6fu7xnz with start time 1708147684.450022
+2024-02-17 14:28:05,097 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: summary_record
+2024-02-17 14:28:05,098 INFO    SenderThread:38195 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-17 14:28:05,104 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: check_version
+2024-02-17 14:28:05,104 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: check_version
+2024-02-17 14:28:05,162 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: run_start
+2024-02-17 14:28:05,170 DEBUG   HandlerThread:38195 [system_info.py:__init__():31] System info init
+2024-02-17 14:28:05,171 DEBUG   HandlerThread:38195 [system_info.py:__init__():46] System info init done
+2024-02-17 14:28:05,171 INFO    HandlerThread:38195 [system_monitor.py:start():181] Starting system monitor
+2024-02-17 14:28:05,171 INFO    SystemMonitor:38195 [system_monitor.py:_start():145] Starting system asset monitoring threads
+2024-02-17 14:28:05,171 INFO    HandlerThread:38195 [system_monitor.py:probe():201] Collecting system info
+2024-02-17 14:28:05,172 INFO    SystemMonitor:38195 [interfaces.py:start():190] Started cpu monitoring
+2024-02-17 14:28:05,172 DEBUG   HandlerThread:38195 [system_info.py:probe():195] Probing system
+2024-02-17 14:28:05,172 INFO    SystemMonitor:38195 [interfaces.py:start():190] Started disk monitoring
+2024-02-17 14:28:05,173 INFO    SystemMonitor:38195 [interfaces.py:start():190] Started gpuapple monitoring
+2024-02-17 14:28:05,175 INFO    SystemMonitor:38195 [interfaces.py:start():190] Started memory monitoring
+2024-02-17 14:28:05,177 INFO    SystemMonitor:38195 [interfaces.py:start():190] Started network monitoring
+2024-02-17 14:28:05,178 DEBUG   HandlerThread:38195 [system_info.py:_probe_git():180] Probing git
+2024-02-17 14:28:05,210 DEBUG   HandlerThread:38195 [system_info.py:_probe_git():188] Probing git done
+2024-02-17 14:28:05,211 DEBUG   HandlerThread:38195 [system_info.py:probe():240] Probing system done
+2024-02-17 14:28:05,211 DEBUG   HandlerThread:38195 [system_monitor.py:probe():210] {'os': 'macOS-14.1.1-arm64-arm-64bit', 'python': '3.10.2', 'heartbeatAt': '2024-02-17T05:28:05.172441', 'startedAt': '2024-02-17T05:28:04.440601', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': '/Users/sangbin/maze/train_epn_3d.py', 'codePath': 'train_epn_3d.py', 'git': {'remote': 'https://github.com/sbpark0611/maze.git', 'commit': '9a75fcd7db21b96d8a95d619b604dcca5bbf7839'}, 'email': 'sbpark0611@kaist.ac.kr', 'root': '/Users/sangbin/maze', 'host': 'bagsangbins-MacBook-Air.local', 'username': 'sangbin', 'executable': '/Library/Frameworks/Python.framework/Versions/3.10/bin/python3', 'cpu_count': 8, 'cpu_count_logical': 8, 'disk': {'total': 460.4317207336426, 'used': 12.535747528076172}, 'gpuapple': {'type': 'arm', 'vendor': 'Apple'}, 'memory': {'total': 8.0}}
+2024-02-17 14:28:05,211 INFO    HandlerThread:38195 [system_monitor.py:probe():211] Finished collecting system info
+2024-02-17 14:28:05,211 INFO    HandlerThread:38195 [system_monitor.py:probe():214] Publishing system info
+2024-02-17 14:28:05,211 DEBUG   HandlerThread:38195 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2024-02-17 14:28:05,211 DEBUG   HandlerThread:38195 [system_info.py:_save_pip():67] Saving pip packages done
+2024-02-17 14:28:05,211 DEBUG   HandlerThread:38195 [system_info.py:_save_code():89] Saving code
+2024-02-17 14:28:05,224 DEBUG   HandlerThread:38195 [system_info.py:_save_code():110] Saving code done
+2024-02-17 14:28:05,224 DEBUG   HandlerThread:38195 [system_info.py:_save_patches():127] Saving git patches
+2024-02-17 14:28:05,303 DEBUG   HandlerThread:38195 [system_info.py:_save_patches():169] Saving git patches done
+2024-02-17 14:28:05,303 INFO    HandlerThread:38195 [system_monitor.py:probe():216] Finished publishing system info
+2024-02-17 14:28:05,307 DEBUG   SenderThread:38195 [sender.py:send():379] send: files
+2024-02-17 14:28:05,307 INFO    SenderThread:38195 [sender.py:_save_file():1375] saving file wandb-metadata.json with policy now
+2024-02-17 14:28:05,307 INFO    SenderThread:38195 [sender.py:_save_file():1375] saving file code/train_epn_3d.py with policy now
+2024-02-17 14:28:05,307 INFO    SenderThread:38195 [sender.py:_save_file():1375] saving file diff.patch with policy now
+2024-02-17 14:28:05,310 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-17 14:28:05,310 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: stop_status
+2024-02-17 14:28:05,541 DEBUG   SenderThread:38195 [sender.py:send():379] send: telemetry
+2024-02-17 14:28:06,102 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/wandb-metadata.json
+2024-02-17 14:28:06,102 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/output.log
+2024-02-17 14:28:06,102 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/wandb-summary.json
+2024-02-17 14:28:06,102 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/code/train_epn_3d.py
+2024-02-17 14:28:06,102 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/requirements.txt
+2024-02-17 14:28:06,103 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/diff.patch
+2024-02-17 14:28:06,103 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/code
+2024-02-17 14:28:06,115 INFO    wandb-upload_0:38195 [upload_job.py:push():131] Uploaded file /var/folders/5w/ln9vmyr148jbsl4zg50n9vgr0000gn/T/tmpb4ptjzegwandb/2kckdcku-wandb-metadata.json
+2024-02-17 14:28:06,115 INFO    wandb-upload_2:38195 [upload_job.py:push():131] Uploaded file /var/folders/5w/ln9vmyr148jbsl4zg50n9vgr0000gn/T/tmpb4ptjzegwandb/0cdso8b0-diff.patch
+2024-02-17 14:28:06,116 INFO    wandb-upload_1:38195 [upload_job.py:push():131] Uploaded file /var/folders/5w/ln9vmyr148jbsl4zg50n9vgr0000gn/T/tmpb4ptjzegwandb/1i8a2k69-code/train_epn_3d.py
+2024-02-17 14:28:06,268 INFO    HandlerThread:38195 [handler.py:handle_tbrecord():759] handling tbrecord: tbrecord {
+  log_dir: "/Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/l6fu7xnz/PPO_1"
+  save: true
+}
+control {
+  relay_id: "5b471172af4240cda6a0fbef8b87be22"
+}
+_info {
+  stream_id: "l6fu7xnz"
+}
+
+2024-02-17 14:28:06,269 DEBUG   HandlerThread:38195 [config_util.py:dict_from_config_file():104] no default config file found in config-defaults.yaml
+2024-02-17 14:28:06,324 DEBUG   SenderThread:38195 [sender.py:send():379] send: tbrecord
+2024-02-17 14:28:08,013 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/output.log
+2024-02-17 14:28:08,014 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/l6fu7xnz/PPO_1/events.out.tfevents.1708147686.bagsangbins-MacBook-Air.local.38180.0
+2024-02-17 14:28:08,016 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/l6fu7xnz/PPO_1
+2024-02-17 14:28:08,016 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/l6fu7xnz
+2024-02-17 14:28:08,534 INFO    wandb-upload_0:38195 [upload_job.py:push():131] Uploaded file /var/folders/5w/ln9vmyr148jbsl4zg50n9vgr0000gn/T/tmpb4ptjzegwandb/hwg2ei4k-l6fu7xnz/PPO_1/events.out.tfevents.1708147686.bagsangbins-MacBook-Air.local.38180.0
+2024-02-17 14:28:09,750 DEBUG   SenderThread:38195 [sender.py:send():379] send: files
+2024-02-17 14:28:09,750 INFO    SenderThread:38195 [sender.py:_save_file():1375] saving file events.out.tfevents.1708147686.bagsangbins-MacBook-Air.local.38180.0 with policy live
+2024-02-17 14:28:09,751 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: status_report
+2024-02-17 14:28:10,067 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/output.log
+2024-02-17 14:28:10,067 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_moved():296] file/dir moved: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/l6fu7xnz/PPO_1/events.out.tfevents.1708147686.bagsangbins-MacBook-Air.local.38180.0 -> /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/events.out.tfevents.1708147686.bagsangbins-MacBook-Air.local.38180.0
+2024-02-17 14:28:10,229 INFO    wandb-upload_1:38195 [upload_job.py:push():131] Uploaded file /var/folders/5w/ln9vmyr148jbsl4zg50n9vgr0000gn/T/tmpb4ptjzegwandb/oiiod5pa-events.out.tfevents.1708147686.bagsangbins-MacBook-Air.local.38180.0
+2024-02-17 14:28:14,771 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: status_report
+2024-02-17 14:28:19,790 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: status_report
+2024-02-17 14:28:20,314 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: stop_status
+2024-02-17 14:28:20,315 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: stop_status
+2024-02-17 14:28:25,559 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: status_report
+2024-02-17 14:28:30,574 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: status_report
+2024-02-17 14:28:32,794 DEBUG   SenderThread:38195 [sender.py:send():379] send: exit
+2024-02-17 14:28:32,794 INFO    SenderThread:38195 [sender.py:send_exit():584] handling exit code: 255
+2024-02-17 14:28:32,796 INFO    SenderThread:38195 [sender.py:send_exit():586] handling runtime: 27
+2024-02-17 14:28:32,798 INFO    SenderThread:38195 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-17 14:28:32,798 INFO    SenderThread:38195 [sender.py:send_exit():592] send defer
+2024-02-17 14:28:32,798 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: defer
+2024-02-17 14:28:32,798 INFO    HandlerThread:38195 [handler.py:handle_request_defer():170] handle defer: 0
+2024-02-17 14:28:32,799 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: defer
+2024-02-17 14:28:32,799 INFO    SenderThread:38195 [sender.py:send_request_defer():608] handle sender defer: 0
+2024-02-17 14:28:32,799 INFO    SenderThread:38195 [sender.py:transition_state():612] send defer: 1
+2024-02-17 14:28:32,799 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: defer
+2024-02-17 14:28:32,799 INFO    HandlerThread:38195 [handler.py:handle_request_defer():170] handle defer: 1
+2024-02-17 14:28:32,799 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: defer
+2024-02-17 14:28:32,799 INFO    SenderThread:38195 [sender.py:send_request_defer():608] handle sender defer: 1
+2024-02-17 14:28:32,799 INFO    SenderThread:38195 [sender.py:transition_state():612] send defer: 2
+2024-02-17 14:28:32,799 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: defer
+2024-02-17 14:28:32,799 INFO    HandlerThread:38195 [handler.py:handle_request_defer():170] handle defer: 2
+2024-02-17 14:28:32,799 INFO    HandlerThread:38195 [system_monitor.py:finish():190] Stopping system monitor
+2024-02-17 14:28:32,799 DEBUG   SystemMonitor:38195 [system_monitor.py:_start():159] Starting system metrics aggregation loop
+2024-02-17 14:28:32,799 DEBUG   SystemMonitor:38195 [system_monitor.py:_start():166] Finished system metrics aggregation loop
+2024-02-17 14:28:32,799 DEBUG   SystemMonitor:38195 [system_monitor.py:_start():170] Publishing last batch of metrics
+2024-02-17 14:28:32,800 INFO    HandlerThread:38195 [interfaces.py:finish():202] Joined cpu monitor
+2024-02-17 14:28:32,800 INFO    HandlerThread:38195 [interfaces.py:finish():202] Joined disk monitor
+2024-02-17 14:28:32,800 INFO    HandlerThread:38195 [interfaces.py:finish():202] Joined gpuapple monitor
+2024-02-17 14:28:32,800 INFO    HandlerThread:38195 [interfaces.py:finish():202] Joined memory monitor
+2024-02-17 14:28:32,800 INFO    HandlerThread:38195 [interfaces.py:finish():202] Joined network monitor
+2024-02-17 14:28:32,800 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: defer
+2024-02-17 14:28:32,800 INFO    SenderThread:38195 [sender.py:send_request_defer():608] handle sender defer: 2
+2024-02-17 14:28:32,800 INFO    SenderThread:38195 [sender.py:transition_state():612] send defer: 3
+2024-02-17 14:28:32,800 DEBUG   SenderThread:38195 [sender.py:send():379] send: telemetry
+2024-02-17 14:28:32,800 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: defer
+2024-02-17 14:28:32,800 INFO    HandlerThread:38195 [handler.py:handle_request_defer():170] handle defer: 3
+2024-02-17 14:28:32,800 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: defer
+2024-02-17 14:28:32,800 INFO    SenderThread:38195 [sender.py:send_request_defer():608] handle sender defer: 3
+2024-02-17 14:28:32,800 INFO    SenderThread:38195 [sender.py:transition_state():612] send defer: 4
+2024-02-17 14:28:32,801 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: defer
+2024-02-17 14:28:32,801 INFO    HandlerThread:38195 [handler.py:handle_request_defer():170] handle defer: 4
+2024-02-17 14:28:33,210 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/wandb-summary.json
+2024-02-17 14:28:35,218 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/output.log
+2024-02-17 14:28:36,224 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/config.yaml
+2024-02-17 14:28:38,157 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: poll_exit
+2024-02-17 14:28:38,157 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: defer
+2024-02-17 14:28:38,157 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: status_report
+2024-02-17 14:28:38,157 INFO    SenderThread:38195 [sender.py:send_request_defer():608] handle sender defer: 4
+2024-02-17 14:28:38,158 INFO    SenderThread:38195 [sender.py:transition_state():612] send defer: 5
+2024-02-17 14:28:38,158 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: poll_exit
+2024-02-17 14:28:38,158 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: defer
+2024-02-17 14:28:38,158 INFO    HandlerThread:38195 [handler.py:handle_request_defer():170] handle defer: 5
+2024-02-17 14:28:38,158 DEBUG   SenderThread:38195 [sender.py:send():379] send: summary
+2024-02-17 14:28:38,158 INFO    SenderThread:38195 [sender.py:_save_file():1375] saving file wandb-summary.json with policy end
+2024-02-17 14:28:38,158 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: defer
+2024-02-17 14:28:38,158 INFO    SenderThread:38195 [sender.py:send_request_defer():608] handle sender defer: 5
+2024-02-17 14:28:38,158 INFO    SenderThread:38195 [sender.py:transition_state():612] send defer: 6
+2024-02-17 14:28:38,158 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: defer
+2024-02-17 14:28:38,158 INFO    HandlerThread:38195 [handler.py:handle_request_defer():170] handle defer: 6
+2024-02-17 14:28:38,158 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: defer
+2024-02-17 14:28:38,158 INFO    SenderThread:38195 [sender.py:send_request_defer():608] handle sender defer: 6
+2024-02-17 14:28:38,159 INFO    SenderThread:38195 [sender.py:transition_state():612] send defer: 7
+2024-02-17 14:28:38,159 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: status_report
+2024-02-17 14:28:38,159 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: defer
+2024-02-17 14:28:38,159 INFO    HandlerThread:38195 [handler.py:handle_request_defer():170] handle defer: 7
+2024-02-17 14:28:38,159 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: defer
+2024-02-17 14:28:38,159 INFO    SenderThread:38195 [sender.py:send_request_defer():608] handle sender defer: 7
+2024-02-17 14:28:38,234 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/wandb-summary.json
+2024-02-17 14:28:38,820 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: keepalive
+2024-02-17 14:28:40,766 INFO    SenderThread:38195 [sender.py:transition_state():612] send defer: 8
+2024-02-17 14:28:40,766 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: defer
+2024-02-17 14:28:40,766 INFO    HandlerThread:38195 [handler.py:handle_request_defer():170] handle defer: 8
+2024-02-17 14:28:40,766 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: defer
+2024-02-17 14:28:40,766 INFO    SenderThread:38195 [sender.py:send_request_defer():608] handle sender defer: 8
+2024-02-17 14:28:40,766 INFO    SenderThread:38195 [job_builder.py:build():281] Attempting to build job artifact
+2024-02-17 14:28:40,766 INFO    SenderThread:38195 [job_builder.py:_get_source_type():400] is repo sourced job
+2024-02-17 14:28:40,767 INFO    SenderThread:38195 [job_builder.py:build():374] adding wandb-job metadata file
+2024-02-17 14:28:40,769 INFO    SenderThread:38195 [sender.py:transition_state():612] send defer: 9
+2024-02-17 14:28:40,770 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: defer
+2024-02-17 14:28:40,770 INFO    HandlerThread:38195 [handler.py:handle_request_defer():170] handle defer: 9
+2024-02-17 14:28:40,770 DEBUG   SenderThread:38195 [sender.py:send():379] send: artifact
+2024-02-17 14:28:41,249 INFO    Thread-12 :38195 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/output.log
+2024-02-17 14:28:42,317 INFO    wandb-upload_2:38195 [upload_job.py:push():86] Skipped uploading /Users/sangbin/Library/Application Support/wandb/artifacts/staging/tmp5qs4ig0p
+2024-02-17 14:28:42,770 INFO    wandb-upload_1:38195 [upload_job.py:push():89] Uploaded file /Users/sangbin/Library/Application Support/wandb/artifacts/staging/tmpnkqrg7an
+2024-02-17 14:28:42,770 INFO    wandb-upload_0:38195 [upload_job.py:push():89] Uploaded file /Users/sangbin/Library/Application Support/wandb/artifacts/staging/tmpxh9n7506
+2024-02-17 14:28:43,839 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: keepalive
+2024-02-17 14:28:44,403 INFO    SenderThread:38195 [sender.py:send_artifact():1475] sent artifact job-https___github.com_sbpark0611_maze.git_train_epn_3d.py - {'id': 'QXJ0aWZhY3Q6NzI0MjY1MTkx', 'digest': 'e7eee88ed46e60ad3e9553849e59ea06', 'state': 'PENDING', 'aliases': [], 'artifactSequence': {'id': 'QXJ0aWZhY3RDb2xsZWN0aW9uOjEzOTcyMDIwNA==', 'latestArtifact': {'id': 'QXJ0aWZhY3Q6NzI0MjY0NDg1', 'versionIndex': 5}}, 'version': 'latest'}
+2024-02-17 14:28:44,404 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: defer
+2024-02-17 14:28:44,404 INFO    SenderThread:38195 [sender.py:send_request_defer():608] handle sender defer: 9
+2024-02-17 14:28:44,404 INFO    SenderThread:38195 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-02-17 14:28:44,404 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: status_report
+2024-02-17 14:28:45,266 INFO    SenderThread:38195 [dir_watcher.py:finish():388] scan: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files
+2024-02-17 14:28:45,266 INFO    SenderThread:38195 [dir_watcher.py:finish():402] scan save: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/diff.patch diff.patch
+2024-02-17 14:28:45,266 INFO    SenderThread:38195 [dir_watcher.py:finish():402] scan save: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/requirements.txt requirements.txt
+2024-02-17 14:28:45,266 INFO    SenderThread:38195 [dir_watcher.py:finish():402] scan save: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/output.log output.log
+2024-02-17 14:28:45,267 INFO    SenderThread:38195 [dir_watcher.py:finish():402] scan save: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/config.yaml config.yaml
+2024-02-17 14:28:45,268 INFO    SenderThread:38195 [dir_watcher.py:finish():402] scan save: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/wandb-summary.json wandb-summary.json
+2024-02-17 14:28:45,268 INFO    SenderThread:38195 [dir_watcher.py:finish():402] scan save: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/events.out.tfevents.1708147686.bagsangbins-MacBook-Air.local.38180.0 events.out.tfevents.1708147686.bagsangbins-MacBook-Air.local.38180.0
+2024-02-17 14:28:45,269 INFO    SenderThread:38195 [dir_watcher.py:finish():402] scan save: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/wandb-metadata.json wandb-metadata.json
+2024-02-17 14:28:45,270 INFO    SenderThread:38195 [dir_watcher.py:finish():402] scan save: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/code/train_epn_3d.py code/train_epn_3d.py
+2024-02-17 14:28:45,271 INFO    SenderThread:38195 [dir_watcher.py:finish():402] scan save: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/l6fu7xnz/PPO_1/events.out.tfevents.1708147686.bagsangbins-MacBook-Air.local.38180.0 l6fu7xnz/PPO_1/events.out.tfevents.1708147686.bagsangbins-MacBook-Air.local.38180.0
+2024-02-17 14:28:45,271 INFO    SenderThread:38195 [sender.py:transition_state():612] send defer: 10
+2024-02-17 14:28:45,271 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: defer
+2024-02-17 14:28:45,271 INFO    HandlerThread:38195 [handler.py:handle_request_defer():170] handle defer: 10
+2024-02-17 14:28:45,271 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: defer
+2024-02-17 14:28:45,271 INFO    SenderThread:38195 [sender.py:send_request_defer():608] handle sender defer: 10
+2024-02-17 14:28:45,271 INFO    SenderThread:38195 [file_pusher.py:finish():159] shutting down file pusher
+2024-02-17 14:28:45,735 INFO    wandb-upload_3:38195 [upload_job.py:push():131] Uploaded file /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/wandb-summary.json
+2024-02-17 14:28:45,740 INFO    wandb-upload_0:38195 [upload_job.py:push():131] Uploaded file /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/output.log
+2024-02-17 14:28:45,777 INFO    wandb-upload_2:38195 [upload_job.py:push():131] Uploaded file /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/requirements.txt
+2024-02-17 14:28:45,825 INFO    wandb-upload_1:38195 [upload_job.py:push():131] Uploaded file /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/files/config.yaml
+2024-02-17 14:28:45,949 INFO    wandb-upload_4:38195 [upload_job.py:push():131] Uploaded file /var/folders/5w/ln9vmyr148jbsl4zg50n9vgr0000gn/T/tmpb4ptjzegwandb/1y4zx4po-l6fu7xnz/PPO_1/events.out.tfevents.1708147686.bagsangbins-MacBook-Air.local.38180.0
+2024-02-17 14:28:46,155 INFO    Thread-11 (_thread_body):38195 [sender.py:transition_state():612] send defer: 11
+2024-02-17 14:28:46,155 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: defer
+2024-02-17 14:28:46,155 INFO    HandlerThread:38195 [handler.py:handle_request_defer():170] handle defer: 11
+2024-02-17 14:28:46,156 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: defer
+2024-02-17 14:28:46,156 INFO    SenderThread:38195 [sender.py:send_request_defer():608] handle sender defer: 11
+2024-02-17 14:28:46,156 INFO    SenderThread:38195 [file_pusher.py:join():164] waiting for file pusher
+2024-02-17 14:28:46,156 INFO    SenderThread:38195 [sender.py:transition_state():612] send defer: 12
+2024-02-17 14:28:46,156 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: defer
+2024-02-17 14:28:46,156 INFO    HandlerThread:38195 [handler.py:handle_request_defer():170] handle defer: 12
+2024-02-17 14:28:46,156 DEBUG   SenderThread:38195 [sender.py:send_request():406] send_request: defer
+2024-02-17 14:28:46,156 INFO    SenderThread:38195 [sender.py:send_request_defer():608] handle sender defer: 12
+2024-02-17 14:28:46,156 INFO    SenderThread:38195 [file_stream.py:finish():593] file stream finish called
+2024-02-17 14:28:46,223 WARNING StreamThr :38195 [internal.py:is_dead():414] Internal process exiting, parent pid 38180 disappeared
+2024-02-17 14:28:46,223 ERROR   StreamThr :38195 [internal.py:wandb_internal():152] Internal process shutdown.
+2024-02-17 14:28:46,364 INFO    SenderThread:38195 [file_stream.py:finish():597] file stream finish is done
+2024-02-17 14:28:46,364 INFO    SenderThread:38195 [sender.py:transition_state():612] send defer: 13
+2024-02-17 14:28:46,364 INFO    SenderThread:38195 [sender.py:finish():1552] shutting down sender
+2024-02-17 14:28:46,364 DEBUG   HandlerThread:38195 [handler.py:handle_request():144] handle_request: defer
+2024-02-17 14:28:46,364 INFO    SenderThread:38195 [file_pusher.py:finish():159] shutting down file pusher
+2024-02-17 14:28:46,364 INFO    HandlerThread:38195 [handler.py:handle_request_defer():170] handle defer: 13
+2024-02-17 14:28:46,364 INFO    SenderThread:38195 [file_pusher.py:join():164] waiting for file pusher
+2024-02-17 14:28:46,364 INFO    HandlerThread:38195 [handler.py:finish():857] shutting down handler
+2024-02-17 14:28:46,364 INFO    WriterThread:38195 [datastore.py:close():294] close: /Users/sangbin/maze/outputs/2024-02-17/14-28-01/wandb/run-20240217_142804-l6fu7xnz/run-l6fu7xnz.wandb

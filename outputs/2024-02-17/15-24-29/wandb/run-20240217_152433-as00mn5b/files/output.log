@@ -1,0 +1,100 @@
+Using cpu device
+tot num of params: 623067
+[2024-02-17 15:24:35,804][absl][WARNING] - Cannot set velocity on Entity with no free joint.
+Logging to /Users/sangbin/maze/outputs/2024-02-17/15-24-29/wandb/run-20240217_152433-as00mn5b/files/as00mn5b/PPO_1
+step 1
+step 2
+step 3
+step 4
+step 5
+step 6
+step 7
+step 8
+step 9
+step 10
+step 11
+step 12
+step 13
+step 14
+step 15
+step 16
+step 17
+step 18
+step 19
+step 20
+step 21
+step 22
+step 23
+step 24
+step 25
+step 26
+step 27
+step 28
+step 29
+step 30
+step 31
+step 32
+step 33
+step 34
+step 35
+step 36
+step 37
+step 38
+step 39
+step 40
+[2024-02-17 15:25:53,284][absl][WARNING] - Cannot set velocity on Entity with no free joint.
+step 1
+step 2
+step 3
+step 4
+step 5
+step 6
+step 7
+Traceback (most recent call last):
+  File "/Users/sangbin/maze/train_epn_3d.py", line 92, in <module>
+    main()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/hydra/_internal/hydra.py", line 119, in run
+    ret = run_job(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+  File "/Users/sangbin/maze/train_epn_3d.py", line 79, in main
+    model.learn(total_timesteps=cfg.optim.total_timesteps, callback=callback)
+  File "/Users/sangbin/maze/ppo/epn/epn.py", line 464, in learn
+    continue_training = self.collect_rollouts(
+  File "/Users/sangbin/maze/ppo/epn/epn.py", line 212, in collect_rollouts
+    actions, values, log_probs = self.policy.forward(
+  File "/Users/sangbin/maze/ppo/epn/policies.py", line 158, in forward
+    combined_embedding = self.model(memory, obs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Users/sangbin/maze/ppo/epn/model.py", line 90, in forward
+    new_prev_states = self.image_embedding_conv(memory_prev_image[i])
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/torch/nn/modules/pooling.py", line 166, in forward
+    return F.max_pool2d(input, self.kernel_size, self.stride,
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/torch/_jit_internal.py", line 488, in fn
+    return if_false(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/torch/nn/functional.py", line 791, in _max_pool2d
+    return torch.max_pool2d(input, kernel_size, stride, padding, dilation, ceil_mode)
+KeyboardInterrupt

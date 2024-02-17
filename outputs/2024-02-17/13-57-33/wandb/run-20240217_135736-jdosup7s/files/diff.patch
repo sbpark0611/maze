@@ -1,0 +1,46 @@
+diff --git a/envs/memory_maze/maze.py b/envs/memory_maze/maze.py
+index 5d26201..d73bf72 100644
+--- a/envs/memory_maze/maze.py
++++ b/envs/memory_maze/maze.py
+@@ -213,7 +213,6 @@ class MemoryMazeTask(random_goal_maze.NullGoalMaze):
+         return True
+ 
+     def _pick_new_target(self, rng: RandomState):
+-        print("_pick_new_target")
+         while True:
+             ix = rng.randint(len(self._targets))
+             # if self._targets[ix].activated:
+diff --git a/envs/memory_maze/tasks.py b/envs/memory_maze/tasks.py
+index c315cdf..bbbd58c 100644
+--- a/envs/memory_maze/tasks.py
++++ b/envs/memory_maze/tasks.py
+@@ -22,7 +22,7 @@ def memory_maze_9x9(**kwargs):
+         roomMinSize = 3,
+     }
+     """
+-    return _memory_maze(9, 2, 250, **kwargs) # Sangbin changed it from 250
++    return _memory_maze(9, 2, 250, **kwargs)
+ 
+ 
+ def memory_maze_11x11(**kwargs):
+diff --git a/gui.py b/gui.py
+index 45ad04c..d2a9d67 100644
+--- a/gui.py
++++ b/gui.py
+@@ -97,6 +97,7 @@ def main():
+             assert 'image' in obs, 'Expecting dictionary observation with obs["image"]'
+             image = obs['image']  # type: ignore
+         else:
++            print(obs)
+             assert isinstance(obs, np.ndarray) and len(obs.shape) == 3, 'Expecting image observation'
+             image = obs
+         image = Image.fromarray(image)
+@@ -179,7 +180,7 @@ def main():
+             print(f'reward: {reward}')
+         if done or force_reset:
+             print(f'Episode done - length: {steps}  return: {return_}')
+-            obs = env.reset()
++            obs, _ = env.reset()
+             steps = 0
+             return_ = 0.0
+             episode += 1

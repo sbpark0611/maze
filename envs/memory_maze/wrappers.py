@@ -9,6 +9,8 @@ import sys
 sys.modules["gym"] = gym
 from math import inf
 import copy
+import cv2
+import time
 
 
 class Wrapper(dm_env.Environment):
@@ -257,6 +259,8 @@ class ObsWrapper(gym.Wrapper):
         self.actions_for_one_grid = 5
 
     def reset(self, seed = 0):
+        #print("start")
+        self.s = 0
         obs, info = self.env.reset(seed)
         self.prev_image = obs["image"]
         new_obs = {"image": obs["image"], "prev_action": 0, "prev_image": self.prev_image, "goal": obs["target_color"]}
@@ -267,12 +271,17 @@ class ObsWrapper(gym.Wrapper):
         return new_obs, info
 
     def step(self, action):
+        self.s += 1
+        print("step",self.s)
         obs, reward, done, truncate, info = self.env.step(action)
 
         # add num of actions to get a target
         if reward > 0:
+            print("YOU RECEIVED THE AMAZING REWARD!!!!!!!!!!!")
             self.oracle_min_num_actions += len(obs['path']) * self.actions_for_one_grid
 
+        cv2.imshow("train", cv2.resize(obs["image"], dsize=(720,720)))
+        cv2.waitKey(1) 
         new_obs = {"image": obs["image"], "prev_action": action, "prev_image": self.prev_image, "goal": obs["target_color"]}
         self.prev_image = copy.deepcopy(obs["image"])
 

@@ -213,7 +213,6 @@ class MemoryMazeTask(random_goal_maze.NullGoalMaze):
         return True
 
     def _pick_new_target(self, rng: RandomState):
-        print("_pick_new_target")
         while True:
             ix = rng.randint(len(self._targets))
             # if self._targets[ix].activated:

@@ -39,7 +39,7 @@ class EPNPPO(OnPolicyAlgorithm):
         env: Union[GymEnv, str],
         learning_rate: Union[float, Schedule] = 3e-4,
         n_steps: int = 2048,
-        batch_size: int = 64,
+        batch_size: int = 256,
         n_epochs: int = 10,
         gamma: float = 0.99,
         gae_lambda: float = 0.95,
@@ -441,7 +441,6 @@ class EPNPPO(OnPolicyAlgorithm):
         for param in self.policy.model.image_embedding_conv.parameters():
             params.extend(param.cpu().detach().numpy().flatten())
 
-        print(np.mean(params), np.std(params))
         self.logger.record("train/embedding_weight_mean", np.mean(params))
         self.logger.record("train/embedding_weight_stddev", np.std(params))
 
@@ -449,7 +448,7 @@ class EPNPPO(OnPolicyAlgorithm):
         self: SelfPPO,
         total_timesteps: int,
         callback: MaybeCallback = None,
-        log_interval: int = 1,
+        log_interval: int = 100,
         tb_log_name: str = "PPO",
         reset_num_timesteps: bool = True,
         progress_bar: bool = False,
@@ -460,8 +459,6 @@ class EPNPPO(OnPolicyAlgorithm):
             total_timesteps, callback, reset_num_timesteps, tb_log_name, progress_bar
         )
         callback.on_training_start(locals(), globals())
-
-        max_rew_ep_info = 0
 
         while self.num_timesteps < total_timesteps:
             continue_training = self.collect_rollouts(
@@ -488,8 +485,6 @@ class EPNPPO(OnPolicyAlgorithm):
                     avg_rew = safe_mean(
                         [ep_info["r"] for ep_info in self.ep_info_buffer]
                     )
-                    max_rew_ep_info = max(max_rew_ep_info, avg_rew)
-                    print(max_rew_ep_info)
                     self.logger.record(
                         "rollout/ep_rew_mean",
                         avg_rew,

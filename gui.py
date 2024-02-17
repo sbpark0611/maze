@@ -97,6 +97,7 @@ def main():
             assert 'image' in obs, 'Expecting dictionary observation with obs["image"]'
             image = obs['image']  # type: ignore
         else:
+            print(obs)
             assert isinstance(obs, np.ndarray) and len(obs.shape) == 3, 'Expecting image observation'
             image = obs
         image = Image.fromarray(image)
@@ -179,7 +180,7 @@ def main():
             print(f'reward: {reward}')
         if done or force_reset:
             print(f'Episode done - length: {steps}  return: {return_}')
-            obs = env.reset()
+            obs, _ = env.reset()
             steps = 0
             return_ = 0.0
             episode += 1
