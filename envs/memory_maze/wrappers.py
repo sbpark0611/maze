@@ -217,10 +217,9 @@ class DiscreteActionSetWrapper(Wrapper):
 class TargetColorAsBorderWrapper(ObservationWrapper):
     """MemoryMaze-specific wrapper, which draws target_color as border on the image."""
 
-    def __init__(self, task):
-        self.task = task
-
     def observation_spec(self):
+        print(self)
+        print(self.env)
         spec = self.env.observation_spec()
         assert isinstance(spec, dict)
         assert 'target_color' in spec

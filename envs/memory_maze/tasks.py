@@ -22,7 +22,7 @@ def memory_maze_9x9(**kwargs):
         roomMinSize = 3,
     }
     """
-    return _memory_maze(5, 1, 250, **kwargs) # Sangbin changed it from 250
+    return _memory_maze(9, 2, 250, **kwargs) # Sangbin changed it from 250
 
 
 def memory_maze_11x11(**kwargs):
@@ -57,10 +57,10 @@ def _memory_maze(
     control_freq=DEFAULT_CONTROL_FREQ,
     discrete_actions=True,
     image_only_obs=False,
-    target_color_in_image=False,
+    target_color_in_image=True,
     global_observables=True,
     top_camera=False,
-    good_visibility=True, # Sangbin changed it to True
+    good_visibility=False,
     show_path=True,
     camera_resolution=64,
     seed=None,
