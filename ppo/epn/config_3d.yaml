@@ -1,4 +1,4 @@
- env:
+env:
 #   maze_size: 9
 #   num_maze: -1
 #   max_episode_steps: 500
@@ -9,10 +9,10 @@
 #   no_duplication: True
 #   seed: 10
 #   maps: null
-   n_envs: 1
+  n_envs: 1
 #   epn: True
-   norm_reward: True
-   norm_obs: True
+  norm_reward: True
+  norm_obs: True
 
 
 ppo:
