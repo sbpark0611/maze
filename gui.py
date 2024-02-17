@@ -168,8 +168,10 @@ def main():
             if np.random.random() < args.random:
                 action = env.action_space.sample()
 
+        print('action', action)
         obs, reward, done, _, info = env.step(action)  # type: ignore
         # print({k: v for k, v in obs.items() if k != 'image'})
+        print(reward)
         steps += 1
         return_ += reward
 

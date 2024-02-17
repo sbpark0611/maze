@@ -213,11 +213,11 @@ class MemoryMazeTask(random_goal_maze.NullGoalMaze):
         return True
 
     def _pick_new_target(self, rng: RandomState):
-        #print("_pick_new_target")
+        print("_pick_new_target")
         while True:
             ix = rng.randint(len(self._targets))
-            if self._targets[ix].activated:
-                continue  # Skip the target that the agent is touching
+            # if self._targets[ix].activated:
+                # continue  # Skip the target that the agent is touching
             self._current_target_ix = ix
             break
 

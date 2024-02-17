@@ -51,7 +51,7 @@ def _memory_maze(
     maze_size,  # measured without exterior walls
     n_targets,
     time_limit,
-    max_rooms=1, # Sangbin changed it from 6
+    max_rooms=2, # Sangbin changed it from 6
     room_min_size=3,
     room_max_size=5,
     control_freq=DEFAULT_CONTROL_FREQ,
