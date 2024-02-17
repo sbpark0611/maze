@@ -448,7 +448,7 @@ class EPNPPO(OnPolicyAlgorithm):
         self: SelfPPO,
         total_timesteps: int,
         callback: MaybeCallback = None,
-        log_interval: int = 100,
+        log_interval: int = 1,
         tb_log_name: str = "PPO",
         reset_num_timesteps: bool = True,
         progress_bar: bool = False,

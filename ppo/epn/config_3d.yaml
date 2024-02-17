@@ -9,15 +9,15 @@ env:
 #   no_duplication: True
 #   seed: 10
 #   maps: null
-  n_envs: 1
+  n_envs: 8
 #   epn: True
   norm_reward: True
   norm_obs: True
 
 
 ppo:
-  batch_size: 512
-  n_steps: 512
+  batch_size: 50
+  n_steps: 50
   n_epochs: 5
   gamma: 0.995
   gae_lambda: 0.95
