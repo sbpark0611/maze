@@ -280,8 +280,8 @@ class ObsWrapper(gym.Wrapper):
             print("YOU RECEIVED THE AMAZING REWARD!!!!!!!!!!!")
             self.oracle_min_num_actions += len(obs['path']) * self.actions_for_one_grid
 
-        cv2.imshow("train", cv2.resize(obs["image"], dsize=(720,720)))
-        cv2.waitKey(1) 
+        #cv2.imshow("train", cv2.resize(obs["image"], dsize=(720,720)))
+        #cv2.waitKey(1) 
         new_obs = {"image": obs["image"], "prev_action": action, "prev_image": self.prev_image, "goal": obs["target_color"]}
         self.prev_image = copy.deepcopy(obs["image"])
 
