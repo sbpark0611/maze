@@ -18,7 +18,7 @@ env:
 ppo:
   batch_size: 50
   n_steps: 50
-  n_epochs: 5
+  n_epochs: 3
   gamma: 0.995
   gae_lambda: 0.95
   max_grad_norm: 1
