@@ -40,11 +40,6 @@ class EPN(nn.Module):
             nn.ELU(),
             nn.Conv2d(d, d * 2, kernels[1], stride),
             nn.ELU(),
-            nn.Conv2d(d * 2, d * 3, kernels[1], stride),
-            nn.MaxPool2d(2),
-            nn.Conv2d(d * 3, d * 4, kernels[1], stride),
-            nn.MaxPool2d(2),
-            nn.ELU(),
             nn.Flatten()
         )
         self.image_embedding_linear = nn.Sequential(
