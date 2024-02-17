@@ -97,7 +97,6 @@ def main():
             assert 'image' in obs, 'Expecting dictionary observation with obs["image"]'
             image = obs['image']  # type: ignore
         else:
-            print(obs)
             assert isinstance(obs, np.ndarray) and len(obs.shape) == 3, 'Expecting image observation'
             image = obs
         image = Image.fromarray(image)

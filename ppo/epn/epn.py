@@ -278,6 +278,7 @@ class EPNPPO(OnPolicyAlgorithm):
                 values,
                 log_probs,
             )
+            #print(self._last_obs["goal"])
             self._last_obs = new_obs
             self._last_act = actions
             self._last_episode_starts = dones

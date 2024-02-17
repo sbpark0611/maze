@@ -131,12 +131,10 @@ class EPNDictRolloutBuffer(DictRolloutBuffer):
             else:
                 print("take_along_axis error!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
-                
-
         observations = {}
         for key in self.observations.keys():
             observations[key] = (
-                take_along_axis(self.observations[key]).squeeze(1).long()
+                take_along_axis(self.observations[key]).squeeze(1)
             )
 
         return EpisodicDictRolloutBufferSamples(
