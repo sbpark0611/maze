@@ -250,7 +250,7 @@ class ObsWrapper(gym.Wrapper):
             'prev_image': subspace3,
             'goal': subspace4
         })
-        self.max_episode_steps = 250
+        self.max_episode_steps = 1000
         self.oracle_min_num_actions = 0
         self.actions_for_one_grid = 5
 

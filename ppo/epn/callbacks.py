@@ -58,7 +58,7 @@ class EvalCallback(EventCallback):
         callback_on_new_best: Optional[BaseCallback] = None,
         callback_after_eval: Optional[BaseCallback] = None,
         n_eval_episodes: int = 32,
-        eval_freq: int = 50000,
+        eval_freq: int = 500,
         log_path: Optional[str] = None,
         best_model_save_path: Optional[str] = None,
         deterministic: bool = False,
@@ -357,7 +357,7 @@ def evaluate_policy(
             deterministic=deterministic,
         )
         new_observations, rewards, dones, infos = env.step(actions.flatten())
-        if current_step >= 500:
+        if current_step >= 500: # sangbin: this value should be env_len * 2
             reversal_rewards += rewards > 0
         current_rewards += rewards
         current_lengths += 1
@@ -368,8 +368,6 @@ def evaluate_policy(
                 done = dones[i]
                 info = infos[i]
                 episode_starts[i] = done
-
-                print(info)
 
                 if callback is not None:
                     callback(locals(), globals())
@@ -398,6 +396,7 @@ def evaluate_policy(
                     current_lengths[i] = 0
                     current_step = 0
                     num_steps2goal.append(info["steps"])
+        print(rollout_buffer.buffer_size, rollout_buffer.pos)
         rollout_buffer.add(
             observations,
             actions,
