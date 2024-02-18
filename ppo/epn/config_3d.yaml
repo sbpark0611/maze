@@ -27,9 +27,9 @@ ppo:
   verbose: 1
 
 epn:
-  embedding_size: 64
+  embedding_size: 128
   num_heads: 8
-  hidden_size: 256
+  hidden_size: 512
   num_iterations: 3
 
 optim:
