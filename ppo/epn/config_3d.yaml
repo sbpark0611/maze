@@ -18,10 +18,10 @@ env:
 ppo:
   batch_size: 256
   n_steps: 256
-  n_epochs: 3
-  gamma: 0.995
-  gae_lambda: 0.95
-  max_grad_norm: 1
+  n_epochs: 10
+  gamma: 0.95
+  gae_lambda: 0.9
+  max_grad_norm: 1.0
   ent_coef: 0.001
   normalize_advantage: True
   verbose: 1
@@ -30,12 +30,12 @@ epn:
   embedding_size: 128
   num_heads: 8
   hidden_size: 512
-  num_iterations: 3
+  num_iterations: 4
 
 optim:
   total_timesteps: 500_000_000
   linear_schedule: False
-  learning_rate: 0.0004
+  learning_rate: 0.0001
   clip_range: 0.2
 
 logger:
