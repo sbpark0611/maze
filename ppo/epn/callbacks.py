@@ -58,7 +58,7 @@ class EvalCallback(EventCallback):
         callback_on_new_best: Optional[BaseCallback] = None,
         callback_after_eval: Optional[BaseCallback] = None,
         n_eval_episodes: int = 32,
-        eval_freq: int = 500,
+        eval_freq: int = 50000,
         log_path: Optional[str] = None,
         best_model_save_path: Optional[str] = None,
         deterministic: bool = False,
@@ -396,7 +396,6 @@ def evaluate_policy(
                     current_lengths[i] = 0
                     current_step = 0
                     num_steps2goal.append(info["steps"])
-        print(rollout_buffer.buffer_size, rollout_buffer.pos)
         rollout_buffer.add(
             observations,
             actions,
