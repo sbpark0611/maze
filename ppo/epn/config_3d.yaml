@@ -9,7 +9,7 @@ env:
 #   no_duplication: True
 #   seed: 10
 #   maps: null
-  n_envs: 1
+  n_envs: 4
 #   epn: True
   norm_reward: True
   norm_obs: True
