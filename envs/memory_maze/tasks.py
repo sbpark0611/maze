@@ -22,7 +22,7 @@ def memory_maze_9x9(**kwargs):
         roomMinSize = 3,
     }
     """
-    return _memory_maze(9, 2, 200, **kwargs)
+    return _memory_maze(9, 2, 250, **kwargs)
 
 
 def memory_maze_11x11(**kwargs):
