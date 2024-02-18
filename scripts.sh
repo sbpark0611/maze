@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J 0.0001
+#SBATCH -J 0.00007
 #SBATCH -N 1
 #SBATCH -n 1
 #sbatch --gpus=2
