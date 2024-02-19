@@ -22,7 +22,7 @@ def memory_maze_9x9(**kwargs):
         roomMinSize = 3,
     }
     """
-    return _memory_maze(9, 2, 250, **kwargs)
+    return _memory_maze(7, 2, 250, **kwargs)
 
 
 def memory_maze_11x11(**kwargs):
@@ -52,7 +52,7 @@ def _memory_maze(
     n_targets,
     time_limit,
     max_rooms=2, # Sangbin changed it from 6
-    room_min_size=3,
+    room_min_size=4,
     room_max_size=5,
     control_freq=DEFAULT_CONTROL_FREQ,
     discrete_actions=True,
@@ -133,7 +133,7 @@ def _memory_maze(
 
     if show_path:
         env = PathToTargetWrapper(env)
-        #env = DrawMinimapWrapper(env)
+        env = DrawMinimapWrapper(env)
 
     if image_only_obs:
         assert target_color_in_image, 'Image-only observation only makes sense with target_color_in_image'

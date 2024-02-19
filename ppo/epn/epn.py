@@ -225,7 +225,6 @@ class EPNPPO(OnPolicyAlgorithm):
                 clipped_actions = np.clip(
                     actions, self.action_space.low, self.action_space.high
                 )
-
             new_obs, rewards, dones, infos = env.step(clipped_actions.flatten())
 
             self.num_timesteps += env.num_envs
@@ -279,7 +278,6 @@ class EPNPPO(OnPolicyAlgorithm):
                 values,
                 log_probs,
             )
-            #print(self._last_obs["goal"])
             self._last_obs = new_obs
             self._last_act = actions
             self._last_episode_starts = dones
