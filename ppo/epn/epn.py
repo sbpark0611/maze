@@ -250,13 +250,13 @@ class EPNPPO(OnPolicyAlgorithm):
                         [info["terminal_observation"]["image"] for info in infos]
                     ),
                     "prev_image": np.array(
-                        [
-                            info["terminal_observation"]["prev_image"]
-                            for info in infos
-                        ]
+                        [info["terminal_observation"]["prev_image"] for info in infos]
                     ),
                     "prev_action": np.array(
                         [info["terminal_observation"]["prev_action"] for info in infos]
+                    ),
+                    "goal": np.array(
+                        [info["terminal_observation"]["goal"] for info in infos]
                     ),
                 }
                 terminal_obs = obs_as_tensor(terminal_obs, self.device)
