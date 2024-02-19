@@ -42,7 +42,7 @@ class EPN(nn.Module):
             nn.Conv2d(d, d * 2, kernels[1], stride),
             nn.MaxPool2d(2),
             nn.ELU(),
-            nn.Conv2d(d * 2, d * 4, kernels[3], stride),
+            nn.Conv2d(d * 2, d * 4, kernels[2], stride),
             nn.MaxPool2d(2),
             nn.Flatten()
         )
