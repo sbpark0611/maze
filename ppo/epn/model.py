@@ -44,7 +44,7 @@ class EPN(nn.Module):
             nn.Flatten()
         )
         self.image_embedding_linear = nn.Sequential(
-            nn.Linear(3336, hidden_size),
+            nn.Linear(3136, hidden_size),
             nn.ELU(),
             nn.Linear(hidden_size, embedding_size)
         )
