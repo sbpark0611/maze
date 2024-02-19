@@ -14,11 +14,10 @@ env:
   norm_reward: True
   norm_obs: True
 
-
 ppo:
   batch_size: 256
   n_steps: 256
-  n_epochs: 10
+  n_epochs: 5
   gamma: 0.95
   gae_lambda: 0.9
   max_grad_norm: 1.0
@@ -27,15 +26,15 @@ ppo:
   verbose: 1
 
 epn:
-  embedding_size: 128
-  num_heads: 8
-  hidden_size: 512
+  embedding_size: 64
+  num_heads: 4
+  hidden_size: 256
   num_iterations: 4
 
 optim:
   total_timesteps: 500_000_000
-  linear_schedule: False
-  learning_rate: 0.00005
+  linear_schedule: True
+  learning_rate: 0.0001
   clip_range: 0.2
 
 logger:

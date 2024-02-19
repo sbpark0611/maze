@@ -39,13 +39,13 @@ class EPN(nn.Module):
         self.image_embedding_conv = nn.Sequential(
             nn.Conv2d(self.in_channels, d, kernels[0], stride),
             nn.ELU(),
-            nn.Conv2d(d, d * 4, kernels[1], stride),
+            nn.Conv2d(d, d * 2, kernels[1], stride),
             nn.ELU(),
-            nn.Conv2d(d * 4, d * 16, kernels[2], stride),
+            nn.Conv2d(d * 2, d * 4, kernels[2], stride),
             nn.Flatten()
         )
         self.image_embedding_linear = nn.Sequential(
-            nn.Linear(3136, hidden_size),
+            nn.Linear(784, hidden_size),
             nn.ELU(),
             nn.Linear(hidden_size, embedding_size)
         )
