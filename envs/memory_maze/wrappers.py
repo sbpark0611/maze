@@ -315,7 +315,7 @@ class ObsWrapper(gym.Wrapper):
 
         self.s += 1
         self.reward_sum += reward
-        self.visualization(cv2.resize(obs["image"], (1080, 1080), interpolation = cv2.INTER_AREA), self.s, self.reward_sum)
+        #self.visualization(cv2.resize(obs["image"], (1080, 1080), interpolation = cv2.INTER_AREA), self.s, self.reward_sum)
 
         new_obs = {"image": obs["image"], "prev_action": action, "prev_image": self.prev_image, "goal": obs["target_color"]}
         self.prev_image = copy.deepcopy(obs["image"])
