@@ -10,6 +10,8 @@ sys.modules["gym"] = gym
 from math import inf
 import copy
 
+import cv2
+
 
 class Wrapper(dm_env.Environment):
     """Base class for dm_env.Environment wrapper."""
@@ -255,8 +257,6 @@ class ObsWrapper(gym.Wrapper):
         self.actions_for_one_grid = 5
 
     def reset(self, seed = 0):
-        #print("start")
-        #self.s = 0
         obs, info = self.env.reset(seed)
         self.prev_image = obs["image"]
         new_obs = {"image": obs["image"], "prev_action": 0, "prev_image": self.prev_image, "goal": obs["target_color"]}
@@ -264,17 +264,58 @@ class ObsWrapper(gym.Wrapper):
         # num of actions to get a target
         self.oracle_min_num_actions = len(obs['path']) * self.actions_for_one_grid
 
+        self.s = 0
+        self.reward_sum = 0
+
         return new_obs, info
 
+    def visualization(self, image, step, reward):
+        # 텍스트 정보 설정
+        text1 = "Steps: " + str(step)
+        text2 = "Rewards: " + str(reward)
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        font_scale = 2
+        font_color = (255, 255, 255)
+        thickness = 5
+        line_type = cv2.LINE_AA
+
+        # 텍스트 크기 계산
+        text1_size = cv2.getTextSize(text1, font, font_scale, thickness)[0]
+        text2_size = cv2.getTextSize(text2, font, font_scale, thickness)[0]
+
+        margin = 50
+
+        # 텍스트를 표시할 이미지의 크기 계산
+        text1_width, text1_height = text1_size[0], text1_size[1]
+        text2_width, text2_height = text2_size[0], text2_size[1]
+        image_height, image_width = image.shape[0], image.shape[1]
+        combined_image = np.zeros((image_height, image_width + max(text1_width, text2_width) + margin * 2, 3), dtype=np.uint8)
+
+        # 이미지 복사
+        combined_image[:, :image_width] = image
+
+        # 텍스트를 합쳐진 이미지의 오른쪽에 추가
+        text_x = image_width + margin  # 텍스트와 이미지 사이의 간격
+        text1_y = text1_height // 2 + (margin * 2)
+        text2_y = text1_height + text2_height // 2 + (margin * 3)
+        cv2.putText(combined_image, text1, (text_x, text1_y), font, font_scale, font_color, thickness, line_type)
+        cv2.putText(combined_image, text2, (text_x, text2_y), font, font_scale, font_color, thickness, line_type)
+
+        # 결과 이미지 표시
+        cv2.imshow('Combined Image', combined_image)
+        cv2.waitKey(1)
+
     def step(self, action):
-        #self.s += 1
-        #print("step",self.s)
         obs, reward, done, truncate, info = self.env.step(action)
 
         # add num of actions to get a target
         if reward > 0:
             print("YOU RECEIVED THE AMAZING REWARD!!!!!!!!!!!")
             self.oracle_min_num_actions += len(obs['path']) * self.actions_for_one_grid
+
+        self.s += 1
+        self.reward_sum += reward
+        self.visualization(cv2.resize(obs["image"], (1080, 1080), interpolation = cv2.INTER_AREA), self.s, self.reward_sum)
 
         new_obs = {"image": obs["image"], "prev_action": action, "prev_image": self.prev_image, "goal": obs["target_color"]}
         self.prev_image = copy.deepcopy(obs["image"])

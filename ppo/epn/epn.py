@@ -25,7 +25,6 @@ from torch.nn import functional as F
 from ppo.epn.buffers import EPNDictRolloutBuffer
 from ppo.epn.policies import ActorCriticEpnPolicy
 
-import cv2
 
 SelfPPO = TypeVar("SelfPPO", bound="EPNPPO")
 

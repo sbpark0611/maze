@@ -17,6 +17,7 @@ class EPN(nn.Module):
         super(EPN, self).__init__()
         self.hidden_size = hidden_size
         self.action_embedding = nn.Embedding(num_actions + 1, embedding_size)
+        self.goal_embedding = nn.Linear(3, embedding_size)
         self.planner = Planner(embedding_size, num_heads, num_iterations)
         self.planner_mlp = nn.Sequential(
             nn.Linear(
@@ -27,7 +28,7 @@ class EPN(nn.Module):
         )
 
         self.feature = nn.Sequential(
-            nn.Linear(embedding_size + self.planner.embedding_size, hidden_size),
+            nn.Linear(embedding_size * 2 + self.planner.embedding_size, hidden_size),
             nn.ReLU(),
         )
 
@@ -89,7 +90,10 @@ class EPN(nn.Module):
             prev_states.append(new_prev_states)
         prev_states = torch.stack(prev_states, dim=0)
 
-        episodic_storage = torch.concat((states, actions, prev_states), dim=-1)
+        goal = self.goal_embedding(obs["goal"].to(torch.float32))
+        goals = goal.unsqueeze(1).expand(-1, fixed_num_steps, -1)
+
+        episodic_storage = torch.concat((states, actions, prev_states, goals), dim=-1)
 
         belief_state = self.planner(episodic_storage)
 
@@ -102,7 +106,7 @@ class EPN(nn.Module):
         belief_state = self.planner_mlp(belief_state)
         planner_output = torch.max(belief_state, dim=1)[0]
 
-        state_goal_embedding = current_state
+        state_goal_embedding = torch.concat((current_state, goal), dim=-1)
         combined_embedding = torch.cat((planner_output, state_goal_embedding), dim=1)
         combined_embedding = self.feature(combined_embedding)
         return combined_embedding
@@ -111,7 +115,7 @@ class EPN(nn.Module):
 class Planner(nn.Module):
     def __init__(self, embedding_size, num_heads, num_iterations, dropout=0):
         super(Planner, self).__init__()
-        self.embedding_size = embedding_size * 3
+        self.embedding_size = 4 * embedding_size
         self.num_heads = num_heads
         self.hidden_size = 16 * embedding_size
         self.num_iterations = num_iterations
