@@ -57,7 +57,7 @@ class EvalCallback(EventCallback):
         eval_env: Union[gym.Env, VecEnv],
         callback_on_new_best: Optional[BaseCallback] = None,
         callback_after_eval: Optional[BaseCallback] = None,
-        n_eval_episodes: int = 32,
+        n_eval_episodes: int = 512,
         eval_freq: int = 50000,
         log_path: Optional[str] = None,
         best_model_save_path: Optional[str] = None,
@@ -357,6 +357,7 @@ def evaluate_policy(
             deterministic=deterministic,
         )
         new_observations, rewards, dones, infos = env.step(actions.flatten())
+
         if current_step >= 500: # sangbin: this value should be env_len * 2
             reversal_rewards += rewards > 0
         current_rewards += rewards
