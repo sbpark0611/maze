@@ -12,7 +12,7 @@ env:
   n_envs: 4
 #   epn: True
   norm_reward: True
-  norm_obs: True
+  norm_obs: False
 
 ppo:
   batch_size: 256
