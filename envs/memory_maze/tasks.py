@@ -133,7 +133,7 @@ def _memory_maze(
 
     if show_path:
         env = PathToTargetWrapper(env)
-        env = DrawMinimapWrapper(env)
+        # env = DrawMinimapWrapper(env)
 
     if image_only_obs:
         assert target_color_in_image, 'Image-only observation only makes sense with target_color_in_image'

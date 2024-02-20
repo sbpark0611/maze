@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J easy
+#SBATCH -J no_minimap
 #SBATCH -N 1
 #SBATCH -n 1
 #sbatch --gpus=2
