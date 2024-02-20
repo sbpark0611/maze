@@ -40,7 +40,7 @@ optim:
 logger:
   upload_to_wandb: False
   run_dir:
-  proj_name:
+  proj_name: my_project
   group_name: EPN
 
 seed: 10
