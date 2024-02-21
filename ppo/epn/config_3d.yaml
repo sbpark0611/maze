@@ -34,7 +34,7 @@ epn:
 optim:
   total_timesteps: 500_000_000
   linear_schedule: True
-  learning_rate: 0.00005
+  learning_rate: 0.00007
   clip_range: 0.2
 
 logger:
