@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J my_proj
+#SBATCH -J normal
 #SBATCH -N 1
 #SBATCH -n 1
 #sbatch --gpus=2
