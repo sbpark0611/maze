@@ -25,6 +25,7 @@ from torch.nn import functional as F
 from ppo.epn.buffers import EPNDictRolloutBuffer
 from ppo.epn.policies import ActorCriticEpnPolicy
 
+
 SelfPPO = TypeVar("SelfPPO", bound="EPNPPO")
 
 
@@ -39,7 +40,7 @@ class EPNPPO(OnPolicyAlgorithm):
         env: Union[GymEnv, str],
         learning_rate: Union[float, Schedule] = 3e-4,
         n_steps: int = 2048,
-        batch_size: int = 64,
+        batch_size: int = 256,
         n_epochs: int = 10,
         gamma: float = 0.99,
         gae_lambda: float = 0.95,
@@ -197,7 +198,6 @@ class EPNPPO(OnPolicyAlgorithm):
             self.policy.reset_noise(env.num_envs)
 
         callback.on_rollout_start()
-
         while n_steps < n_rollout_steps:
             if (
                 self.use_sde
@@ -225,7 +225,6 @@ class EPNPPO(OnPolicyAlgorithm):
                 clipped_actions = np.clip(
                     actions, self.action_space.low, self.action_space.high
                 )
-
             new_obs, rewards, dones, infos = env.step(clipped_actions.flatten())
 
             self.num_timesteps += env.num_envs
@@ -246,20 +245,17 @@ class EPNPPO(OnPolicyAlgorithm):
             # see GitHub issue #633
             if dones.any() and infos[0].get("terminal_observation") is not None:
                 terminal_obs = {
-                    "position": np.array(
-                        [info["terminal_observation"]["position"] for info in infos]
+                    "image": np.array(
+                        [info["terminal_observation"]["image"] for info in infos]
                     ),
-                    "prev_position": np.array(
-                        [
-                            info["terminal_observation"]["prev_position"]
-                            for info in infos
-                        ]
-                    ),
-                    "goal": np.array(
-                        [info["terminal_observation"]["goal"] for info in infos]
+                    "prev_image": np.array(
+                        [info["terminal_observation"]["prev_image"] for info in infos]
                     ),
                     "prev_action": np.array(
                         [info["terminal_observation"]["prev_action"] for info in infos]
+                    ),
+                    "goal": np.array(
+                        [info["terminal_observation"]["goal"] for info in infos]
                     ),
                 }
                 terminal_obs = obs_as_tensor(terminal_obs, self.device)
@@ -332,6 +328,7 @@ class EPNPPO(OnPolicyAlgorithm):
 
                 obs = rollout_data.observations
                 memory = rollout_data.memory
+
                 values, log_prob, entropy = self.policy.evaluate_actions(
                     memory, obs, actions
                 )
@@ -440,6 +437,13 @@ class EPNPPO(OnPolicyAlgorithm):
         if self.clip_range_vf is not None:
             self.logger.record("train/clip_range_vf", clip_range_vf)
 
+        params = []
+        for param in self.policy.model.image_embedding_conv.parameters():
+            params.extend(param.cpu().detach().numpy().flatten())
+
+        self.logger.record("train/embedding_weight_mean", np.mean(params))
+        self.logger.record("train/embedding_weight_stddev", np.std(params))
+
     def learn(
         self: SelfPPO,
         total_timesteps: int,
@@ -463,13 +467,11 @@ class EPNPPO(OnPolicyAlgorithm):
                 self.rollout_buffer,
                 n_rollout_steps=self.n_steps,
             )
-
             if continue_training is False:
                 break
 
             iteration += 1
             self._update_current_progress_remaining(self.num_timesteps, total_timesteps)
-
             # Display training infos
             if log_interval is not None and iteration % log_interval == 0:
                 time_elapsed = max(
@@ -491,14 +493,6 @@ class EPNPPO(OnPolicyAlgorithm):
                         "rollout/ep_len_mean",
                         safe_mean([ep_info["l"] for ep_info in self.ep_info_buffer]),
                     )
-                    oracle_reward = (
-                        self.env.envs[0].max_episode_steps
-                        / self.env.envs[0].oracle_min_num_actions
-                    )
-                    self.logger.record(
-                        "rollout/fraction_of_oracle", avg_rew / oracle_reward
-                    )
-                    self.logger.record("rollout/oracle_reward", oracle_reward)
                 self.logger.record("time/fps", fps)
                 self.logger.record(
                     "time/time_elapsed", int(time_elapsed), exclude="tensorboard"

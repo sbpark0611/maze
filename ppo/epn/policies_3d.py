@@ -46,7 +46,7 @@ class ActorCriticEpnPolicy(ActorCriticPolicy):
         optimizer_class: Type[th.optim.Optimizer] = th.optim.Adam,
         optimizer_kwargs: Optional[Dict[str, Any]] = None,
         epn_kwargs: Optional[Dict[str, Any]] = {
-            "embedding_size": 16,
+            "embedding_size": 4,
             "num_heads": 1,
             "hidden_size": 64,
             "num_iterations": 1,
@@ -72,9 +72,8 @@ class ActorCriticEpnPolicy(ActorCriticPolicy):
             optimizer_class,
             optimizer_kwargs,
         )
-        self._num_labels = self.observation_space.get("position").n
         self._num_action = self.action_space.n
-        self.model = EPN(self._num_labels, self._num_action, **epn_kwargs)
+        self.model = EPN(self._num_action, **epn_kwargs)
         # Setup optimizer with initial learning rate
         self.optimizer = self.optimizer_class(
             self.parameters(), lr=lr_schedule(1), **self.optimizer_kwargs

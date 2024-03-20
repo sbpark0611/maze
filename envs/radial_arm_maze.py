@@ -23,20 +23,10 @@ import gymnasium as gym
 from gymnasium import spaces
 
 
-class MemoryPlanningGame(gym.Env):
+class RadialArmMaze(gym.Env):
     """Memory & Planning Game environment."""
 
     metadata = {"render_modes": ["human", "rgb_array"], "render_fps": 4}
-
-    ACTION_NAMES = ["Collect", "Right", "Down", "Up", "Left"]
-    NUM_ACTIONS = len(ACTION_NAMES)
-    ACTION_POOL = [
-        (0, 0),
-        (1, 0),
-        (0, 1),
-        (0, -1),
-        (-1, 0),
-    ]  # 0:Collect 1:Right 2:Down 3:Up 4:Left
 
     def __init__(
         self,
@@ -46,6 +36,7 @@ class MemoryPlanningGame(gym.Env):
         target_reward=1.0,
         per_step_reward=0.0,
         num_labels=10,
+        num_arms=2,
         render_mode=None,
         maps=None,
         epn=False,
@@ -54,12 +45,16 @@ class MemoryPlanningGame(gym.Env):
         seed=None,
         **kwargs,
     ):
-        super(MemoryPlanningGame, self).__init__()
+        super(RadialArmMaze, self).__init__()
 
         self._maze_size = maze_size
         self._num_maze = num_maze
-        self._num_labels = num_labels
-        self._graph = nx.grid_2d_graph(self._maze_size, self._maze_size, periodic=True)
+        self._num_labels = num_labels        
+        
+        self._num_arms = num_arms
+
+        self._graph = nx.grid_2d_graph(self._num_arms + 1, self._maze_size, periodic=True)
+
         self._max_episode_steps = max_episode_steps
         self._target_reward = target_reward
         self._per_step_reward = per_step_reward
@@ -70,11 +65,11 @@ class MemoryPlanningGame(gym.Env):
         self._no_duplication = no_duplication
 
         if self._no_duplication:
-            self._num_labels = self._maze_size**2
+            self._num_labels = self._maze_size * (self._num_arms + 1)
 
         self.pos2idx = {n: i for i, n in enumerate(self._graph.nodes())}
 
-        self.action_space = spaces.Discrete(self.NUM_ACTIONS)
+        self.action_space = spaces.Discrete(self._num_arms + 1)
         self.epn = epn
         if self.epn:
             self.observation_space = spaces.Dict(
@@ -82,7 +77,7 @@ class MemoryPlanningGame(gym.Env):
                     "position": spaces.Discrete(self._num_labels + 1),
                     "prev_position": spaces.Discrete(self._num_labels + 1),
                     "goal": spaces.Discrete(self._num_labels + 1),
-                    "prev_action": spaces.Discrete(self.NUM_ACTIONS + 1),
+                    "prev_action": spaces.Discrete(self._num_arms + 2),
                 }
             )
         else:
@@ -90,7 +85,7 @@ class MemoryPlanningGame(gym.Env):
                 {
                     "position": spaces.Discrete(self._num_labels),
                     "goal": spaces.Discrete(self._num_labels),
-                    "prev_action": spaces.Discrete(self.NUM_ACTIONS + 1),
+                    "prev_action": spaces.Discrete(self._num_arms + 2),
                     "reward": spaces.Discrete(2),
                 }
             )
@@ -114,7 +109,7 @@ class MemoryPlanningGame(gym.Env):
             self.labels = self.np_random.integers(
                 0,
                 self._num_labels,
-                size=(self._num_maze, self._maze_size, self._maze_size),
+                size=(self._num_maze, self._num_arms + 1, self._maze_size),
             )  # obs
             # Initialize fixed goals
             self.goals = []
@@ -158,23 +153,37 @@ class MemoryPlanningGame(gym.Env):
             "pos": self.pos2idx[self._position],
             "steps": self.num_steps,
         }
+    
+    def get_next_position(self, position, action):
+        if position[1] == self._maze_size - 1: # pick one arm
+            return tuple([action, self._maze_size - 2])
+        if position[0] == 0: # first raw
+            if action == 1: # forward
+                return tuple([position[0], position[1] + 1])
+            if action == 2: # backward
+                return tuple([position[0], max(position[1] - 1, 0)])
+            return position
+        else:
+            if action == 1: # forward
+                return tuple([position[0], max(position[1] - 1, 0)])
+            if action == 2: # backward
+                return tuple([position[0], position[1] + 1])
+            return position
 
     def step(self, action):
         self._episode_steps += 1
         self._steps2goal += 1
-        direction = self.ACTION_POOL[action]
         self._prev_position = self._position
-        self._position = tuple(
-            (np.array(self._position) + np.array(direction)) % self._maze_size
-        )
+        self._position = self.get_next_position(self._position, action)
         self._prev_action = action
         if (
             self._position == self._goal
-            and self.ACTION_NAMES[action] == "Collect"
+            and action == 0
             and not self._pretrain_mode
         ):
             reward = self._target_reward
-            self._set_new_goal()
+            # self._set_new_goal()  dont change goal when agent find it
+            self._position = tuple([0, 0])
         else:
             reward = self._per_step_reward
             self._is_respawn = False
@@ -207,7 +216,7 @@ class MemoryPlanningGame(gym.Env):
                 random_labels = np.random.permutation(sequence)
             else:
                 random_labels = self.np_random.integers(
-                    0, self._num_labels, size=(self._maze_size**2,)
+                    0, self._num_labels, size=(self._maze_size * (self._num_arms + 1),)
                 )
             self._respawn()
             self._set_new_goal(start=True)
@@ -221,6 +230,7 @@ class MemoryPlanningGame(gym.Env):
                 n: random_labels[i] for i, n in enumerate(self._graph.nodes())
             }
             self._respawn()
+            self._set_new_goal(start=True)
             goal = self.goals[self._env_idx]
             if self._reverse:
                 mirror_goal = self._mirror_position(goal)
@@ -228,10 +238,6 @@ class MemoryPlanningGame(gym.Env):
                 self._labels[goal] = tmp_lable2
                 self._labels[mirror_goal] = tmp_lable1
                 goal = mirror_goal
-            while goal == self._position:
-                self._respawn()
-                random_idx = self.np_random.integers(self._maze_size**2)
-                goal = list(self._graph.nodes())[random_idx]
             self._goal = goal
 
         if self.render_mode == "human":
@@ -240,24 +246,14 @@ class MemoryPlanningGame(gym.Env):
         return self._get_obs(), self._get_info()
 
     def _respawn(self):
-        random_idx = self.np_random.integers(self._maze_size**2)
-        self._position = list(self._graph.nodes())[random_idx]
+        self._position = tuple([0, 0])
 
     def _mirror_position(self, pos):
-        n = self._maze_size
-        x, y = pos
-        # Swap x and y (main diagonal reflection)
-        x, y = y, x
-        # Swap x and y again and reverse them (anti-diagonal reflection)
-        x, y = n - y - 1, n - x - 1
-        return (x, y)
+        mirror_arm = pos[0] % self._num_arms + 1
+        return tuple([mirror_arm, pos[1]])
 
     def _set_new_goal(self, start=False):
-        goal = self._position
-        while goal == self._position:
-            random_idx = self.np_random.integers(self._maze_size**2)
-            goal = list(self._graph.nodes())[random_idx]
-        self._goal = goal
+        self._goal = tuple([self.np_random.integers(self._num_arms) + 1, 0])
         if start:
             self._is_respawn = False
             self._steps2goal = 0
@@ -414,16 +410,17 @@ class MemoryPlanningGame(gym.Env):
             pygame.quit()
 
     @staticmethod
-    def generate_worlds(num_maze, maze_size, num_labels, seed=None, **kwargs):
+    def generate_worlds(num_maze, maze_size, num_arms, seed=None, **kwargs):
         rng = np.random.default_rng(seed)
-        labels = rng.integers(
-            0, num_labels, size=(num_maze, maze_size, maze_size)
-        )  # obs
-        print(labels)
+        sequence = np.arange((num_arms + 1) * maze_size)
+        labels = []
+        for _ in range(num_maze):
+            labels.append(rng.permutation(sequence))
+
         # Initialize fixed goals
         goals = []
-        for _ in range(num_maze):
-            fixed_goal = (rng.integers(maze_size), rng.integers(maze_size))
+        for i in range(num_arms):
+            fixed_goal = tuple([i + 1, 0])
             goals.append(fixed_goal)
         return {"labels": labels, "goals": goals}
 

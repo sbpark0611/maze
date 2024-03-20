@@ -1,5 +1,6 @@
 env:
-  maze_size: 4
+  maze_size: 5
+  num_arms: 4
   num_maze: -1
   max_episode_steps: 128
   target_reward: 1.0

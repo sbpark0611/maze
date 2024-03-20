@@ -58,7 +58,7 @@ class EvalCallback(EventCallback):
         callback_on_new_best: Optional[BaseCallback] = None,
         callback_after_eval: Optional[BaseCallback] = None,
         n_eval_episodes: int = 512,
-        eval_freq: int = 5000,
+        eval_freq: int = 50000,
         log_path: Optional[str] = None,
         best_model_save_path: Optional[str] = None,
         deterministic: bool = False,
@@ -155,7 +155,7 @@ class EvalCallback(EventCallback):
             # Reset success rate buffer
             self._is_success_buffer = []
 
-            episode_rewards, episode_lengths, num_steps2goal = evaluate_policy(
+            episode_rewards, episode_lengths, num_steps2goal, episode_reversal_rewards = evaluate_policy(
                 self.model,
                 self.eval_env,
                 n_eval_episodes=self.n_eval_episodes,
@@ -188,6 +188,7 @@ class EvalCallback(EventCallback):
                 )
 
             mean_reward, std_reward = np.mean(episode_rewards), np.std(episode_rewards)
+            reversal_mean_reward, reversal_std_reward = np.mean(episode_reversal_rewards), np.std(episode_reversal_rewards)
             mean_ep_length, std_ep_length = np.mean(episode_lengths), np.std(
                 episode_lengths
             )
@@ -202,6 +203,7 @@ class EvalCallback(EventCallback):
                 print(f"Avg. steps to goal: {self.evaluations_steps2goal}")
             # Add to current Logger
             self.logger.record(f"{self.prefix}/mean_reward", float(mean_reward))
+            self.logger.record(f"{self.prefix}/reversal_mean_reward", float(reversal_mean_reward))
             self.logger.record(f"{self.prefix}/mean_ep_length", mean_ep_length)
 
             if len(self._is_success_buffer) > 0:
@@ -212,7 +214,7 @@ class EvalCallback(EventCallback):
 
             # Dump log so the evaluation results are printed with the correct timestep
             self.logger.record(
-                "time/total_timesteps", self.num_timesteps, exclude="tensorboard"
+                f"{self.prefix}/total_timesteps", self.num_timesteps, exclude="tensorboard"
             )
 
             plt.plot(np.arange(len(num_steps2goal)) + 1, num_steps2goal)
@@ -220,7 +222,7 @@ class EvalCallback(EventCallback):
             plt.ylabel("Avg. No. of steps to goal")
             figure = plt.gcf()
             self.logger.record(
-                "trajectory/steps2goal",
+                f"{self.prefix}/steps2goal",
                 Figure(figure, close=True),
                 exclude=("stdout", "log", "json", "csv"),
             )
@@ -324,6 +326,7 @@ def evaluate_policy(
 
     n_envs = env.num_envs
     episode_rewards = []
+    episode_reversal_rewards = []
     episode_lengths = []
 
     episode_counts = np.zeros(n_envs, dtype="int")
@@ -341,6 +344,9 @@ def evaluate_policy(
     episode_starts = np.ones((env.num_envs,), dtype=bool)
     num_steps2goal = []
     _last_episode_starts = episode_starts
+
+    current_step = 0
+    reversal_rewards = np.zeros(n_envs)
     while (episode_counts < episode_count_targets).any():
         if _last_episode_starts.any():
             rollout_buffer.reset()
@@ -351,8 +357,12 @@ def evaluate_policy(
             deterministic=deterministic,
         )
         new_observations, rewards, dones, infos = env.step(actions.flatten())
+
+        if current_step >= 500: # sangbin: this value should be env_len * 2
+            reversal_rewards += rewards > 0
         current_rewards += rewards
         current_lengths += 1
+        current_step += 1
         for i in range(n_envs):
             if episode_counts[i] < episode_count_targets[i]:
                 # unpack values so that the callback can access the local variables
@@ -374,14 +384,18 @@ def evaluate_policy(
                             # has been wrapped with it. Use those rewards instead.
                             episode_rewards.append(info["episode"]["r"])
                             episode_lengths.append(info["episode"]["l"])
+                            episode_reversal_rewards.append(reversal_rewards[i])
                             # Only increment at the real end of an episode
                             episode_counts[i] += 1
                     else:
                         episode_rewards.append(current_rewards[i])
+                        episode_reversal_rewards.append(reversal_rewards[i])
                         episode_lengths.append(current_lengths[i])
                         episode_counts[i] += 1
                     current_rewards[i] = 0
+                    reversal_rewards[i] = 0
                     current_lengths[i] = 0
+                    current_step = 0
                     num_steps2goal.append(info["steps"])
         rollout_buffer.add(
             observations,
@@ -401,11 +415,12 @@ def evaluate_policy(
     average_values = df.mean(axis=0, skipna=True).values
     mean_reward = np.mean(episode_rewards)
     std_reward = np.std(episode_rewards)
+
     if reward_threshold is not None:
         assert mean_reward > reward_threshold, (
             "Mean reward below threshold: "
             f"{mean_reward:.2f} < {reward_threshold:.2f}"
         )
     if return_episode_rewards:
-        return episode_rewards, episode_lengths, average_values
+        return episode_rewards, episode_lengths, average_values, episode_reversal_rewards
     return mean_reward, std_reward
