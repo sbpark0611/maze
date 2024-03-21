@@ -51,14 +51,14 @@ def main(cfg: DictConfig) -> None:
         ]
     )
 
-    # run = wandb.init(
-    #     dir=cfg.logger.run_dir,
-    #     config=OmegaConf.to_container(cfg, resolve=True, throw_on_missing=True),
-    #     project=cfg.logger.proj_name,
-    #     group=cfg.logger.group_name,
-    #     sync_tensorboard=True,
-    #     save_code=True,
-    # )
+    run = wandb.init(
+        dir=cfg.logger.run_dir,
+        config=OmegaConf.to_container(cfg, resolve=True, throw_on_missing=True),
+        project=cfg.logger.proj_name,
+        group=cfg.logger.group_name,
+        sync_tensorboard=True,
+        save_code=True,
+    )
     if cfg.optim.linear_schedule:
         lr = linear_schedule(cfg.optim.learning_rate)
         cr = linear_schedule(cfg.optim.clip_range)
@@ -77,14 +77,14 @@ def main(cfg: DictConfig) -> None:
 
     model.learn(total_timesteps=cfg.optim.total_timesteps, callback=callback)
 
-    # local_path = osp.join("/".join(run.dir.split("/")[:-3]), "local_saves_wandb")
-    # Path(osp.join(local_path, run.id)).mkdir(parents=True, exist_ok=True)
-    # model.save(osp.join(local_path, run.id, "model"))
-    # env.save(osp.join(local_path, run.id, "venv_norm.pkl"))
-    # if cfg.logger.upload_to_wandb:
-    #     wandb.save(osp.join(local_path, run.id, "model.zip"))
-    #     wandb.save(osp.join(local_path, run.id, "venv_norm.pkl"))
-    # run.finish()
+    local_path = osp.join("/".join(run.dir.split("/")[:-3]), "local_saves_wandb")
+    Path(osp.join(local_path, run.id)).mkdir(parents=True, exist_ok=True)
+    model.save(osp.join(local_path, run.id, "model"))
+    env.save(osp.join(local_path, run.id, "venv_norm.pkl"))
+    if cfg.logger.upload_to_wandb:
+        wandb.save(osp.join(local_path, run.id, "model.zip"))
+        wandb.save(osp.join(local_path, run.id, "venv_norm.pkl"))
+    run.finish()
 
 
 if __name__ == "__main__":

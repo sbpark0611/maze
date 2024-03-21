@@ -171,6 +171,17 @@ class RadialArmMaze(gym.Env):
             return position
 
     def step(self, action):
+        for x in range(self._num_arms+1):
+            for y in range(self._maze_size):
+                p = tuple([x, y])
+                if p == self._goal:
+                    print('g', end=' ')
+                elif p == self._position:
+                    print('o', end=' ')
+                else:
+                    print(self._labels[p], end=' ')
+            print()
+        print('---------------------')
         self._episode_steps += 1
         self._steps2goal += 1
         self._prev_position = self._position
